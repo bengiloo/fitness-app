@@ -4,7 +4,7 @@ import axios from "axios"
 const Login = () => {
   return (
     <div className="min-h-screen h-screen flex items-center justify-center">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-sm p-8 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Login to Your Account</h2>
         
         <form>
