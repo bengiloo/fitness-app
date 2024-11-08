@@ -1,12 +1,9 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Login from './Login'
-import CreateAccount  from './CreateAccount'
-import axios from "axios"
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import LandingPage from './LandingPage'
-
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './LandingPage';
+import Login from './Login';
+import CreateAccount from './CreateAccount';
+import GetStartedForm from './GetStartedForm'; // Import the new component
 
 const App = () => {
   return (
@@ -16,11 +13,11 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/get-started" element={<GetStartedForm />} /> {/* New Route */}
         </Routes>
       </Router>
-
     </div>
   );
 };
 
-export default App
+export default App;
