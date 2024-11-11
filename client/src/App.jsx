@@ -4,8 +4,7 @@ import LandingPage from './LandingPage';
 import Login from './Login';
 import CreateAccount from './CreateAccount';
 import GetStartedForm from './GetStartedForm'; // Import the new component
-import Exercises from './Exercises'
-import ExerciseDetail from './components/ExerciseDetail'
+
 const App = () => {
   return (
     <div className="bg-gradient-to-br from-[#01030f] to-[#001f3f] min-h-screen">
@@ -15,8 +14,6 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/get-started" element={<GetStartedForm />} /> {/* New Route */}
-          <Route path="/exercises" element={<Exercises />} />
-          <Route path="/exercise/:id" element={<ExerciseDetail />} />
         </Routes>
       </Router>
     </div>
