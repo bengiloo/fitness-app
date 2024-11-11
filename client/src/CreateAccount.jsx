@@ -1,13 +1,45 @@
 import React from 'react';
+import { useState, useEffect } from 'react'
+import axios from "axios"
+import { useNavigate } from 'react-router-dom';
+
 
 const CreateAccount = () => {
+
+  const [user, setUser] = useState(null);
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // TODO: Needs to be tested more (Postman)
+    try {
+      const res = await axios.post("http://localhost:3000/api/register", {
+        email,
+        password,
+        firstname,
+        lastname
+      });
+      setUser(res.data);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(true);
+      console.error("Registration has failed: ", err);
+    }
+  }
+
+  
   return (
     <div className="min-h-screen h-screen flex items-center justify-center">
       <div className="w-full max-w-sm p-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg shadow-2xl ring-4 ring-blue-500 ring-opacity-50">
       <div className="w-full max-w-md p-8 bg-black rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-white-700 mb-6">Create Your Account</h2>
         
-        <form>
+        <form onSubmit={handleSubmit}>
           {/* First Name and Last Name Input */}
           <div className="flex mb-4 space-x-4">
             <div className="w-1/2">
@@ -17,6 +49,7 @@ const CreateAccount = () => {
                 id="first-name"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="First Name"
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
 
@@ -27,6 +60,7 @@ const CreateAccount = () => {
                 id="last-name"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Last Name"
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </div>
@@ -39,6 +73,7 @@ const CreateAccount = () => {
               id="email"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -50,6 +85,7 @@ const CreateAccount = () => {
               id="password"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Create a password"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 

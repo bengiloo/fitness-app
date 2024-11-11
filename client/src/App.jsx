@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import Login from './Login';
 import CreateAccount from './CreateAccount';
-import GetStartedForm from './GetStartedForm'; // Import the new component
+import GetStartedForm from './GetStartedForm';
+import Dashboard from './Dashboard';
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/get-started" element={<GetStartedForm />} /> {/* New Route */}
+          <Route path="/dashboard" element={<Dashboard />} /> {}
+          <Route path="/get-started" element={<GetStartedForm />} />
         </Routes>
       </Router>
     </div>

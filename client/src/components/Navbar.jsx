@@ -6,10 +6,6 @@ import {useState} from "react";
 export const Navbar = () => {
     const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
-    const toggleNavbar = () => {
-        setMobileDrawerOpen(!mobileDrawerOpen);
-    }
-
   return (
     // Navbar
     <nav className="sticky top-0 z-50 py-3 backdrop-blur-lg 
@@ -42,7 +38,7 @@ export const Navbar = () => {
                     the "X" icon when toggled works when page is condensed to mobile
                 */}
                 <div className="lg:hidden md:flex flex-col justify-end">
-                    <button onClick={toggleNavbar}>
+                    <button onClick={() => setMobileDrawerOpen(!mobileDrawerOpen)}>
                         {mobileDrawerOpen ? <X /> : <Menu />}
                     </button>
                 </div>
