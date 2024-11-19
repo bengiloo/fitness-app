@@ -59,20 +59,19 @@ const GetStartedForm = () => {
         {
           workout_type: 'Upper Body',
           exercises: filterExercisesByEquipment([
-            { name: 'Bench Press', sets: 3, reps: 10 },
-            { name: 'Bent Over Rows', sets: 3, reps: 10 },
-            { name: 'Shoulder Press', sets: 3, reps: 12 },
-            { name: 'Push-Ups', sets: 3, reps: 12 },
-            { name: 'Bench Press', sets: 3, reps: 10 },
-            { name: 'Deadlifts', sets: 4, reps: 8 },
+            { name: 'Bench Press', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=SCVCLChPQFY'},
+            { name: 'Bent Over Rows', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=vT2GjY_Umpw'},
+            { name: 'Shoulder Press', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=5yWaNOvgFCM' },
+            { name: 'Push-Ups', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=_l3ySVKYVJ8' },
+            { name: 'Deadlifts', sets: 4, reps: 8, videoUrl: 'https://www.youtube.com/watch?v=op9kVnSso6Q'},
           ], equipment),
         },
         {
           workout_type: 'Lower Body',
           exercises: filterExercisesByEquipment([
-            { name: 'Squats', sets: 4, reps: 10 },
-            { name: 'Lunges', sets: 3, reps: 12 },
-            { name: 'Calf Raises', sets: 3, reps: 15 },
+            { name: 'Squats', sets: 4, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=aclHkVaku9U'},
+            { name: 'Lunges', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=QOVaHwm-Q6U'},
+            { name: 'Calf Raises', sets: 3, reps: 15, videoUrl: 'https://www.youtube.com/watch?v=-M4-G8p8fmc'},
           ], equipment),
         },
       ],
@@ -80,40 +79,40 @@ const GetStartedForm = () => {
         {
           workout_type: 'Chest and Triceps',
           exercises: filterExercisesByEquipment([
-            { name: 'Bench Press', sets: 3, reps: 10 },
-            { name: 'Dumbbell Flyes', sets: 3, reps: 12 },
-            { name: 'Tricep Dips', sets: 3, reps: 10 },
-            { name: 'Push-Ups', sets: 3, reps: 12 }, // added Push-Ups for bodyweight
-            { name: 'Overhead Tricep Extension', sets: 3, reps: 12 }, // added dumbbell exercise for triceps
+            { name: 'Bench Press', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=rT7DgCr-3pg' },
+            { name: 'Dumbbell Flyes', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=eozdVDA78K0' },
+            { name: 'Tricep Dips', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=6kALZikXxLc' },
+            { name: 'Push-Ups', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=_l3ySVKYVJ8' }, // added Push-Ups for bodyweight
+            { name: 'Overhead Tricep Extension', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=nRiJVZDpdL0' }, // added dumbbell exercise for triceps
           ], equipment),
         },
         {
           workout_type: 'Back and Biceps',
           exercises: filterExercisesByEquipment([
-            { name: 'Deadlifts', sets: 4, reps: 8 },
-            { name: 'Bent-Over Rows', sets: 4, reps: 10 },
-            { name: 'Hammer Curls', sets: 3, reps: 12 },
-            { name: 'Pull-Ups', sets: 3, reps: 8 },
-            { name: 'Bicep Curls', sets: 3, reps: 12 },
-            { name: 'Bodyweight Rows', sets: 3, reps: 12 },
-            { name: 'Superman Exercise', sets: 3, reps: 15 },
-            { name: 'Towel Rows', sets: 3, reps: 10 },
-            { name: 'Reverse Snow Angels', sets: 3, reps: 15 },
-            { name: 'Chin-Ups', sets: 3, reps: 6 },
-            { name: 'Prone Y Raises', sets: 3, reps: 12 },
-            { name: 'Plank Rows', sets: 3, reps: 8 },
-            { name: 'Wall Push-Ups', sets: 3, reps: 15 },
-            { name: 'Wide Push-Ups', sets: 3, reps: 12 },
-            { name: 'Scapular Pull-Ups', sets: 3, reps: 10 },
+            { name: 'Deadlifts', sets: 4, reps: 8, videoUrl: 'https://www.youtube.com/watch?v=op9kVnSso6Q' },
+            { name: 'Bent-Over Rows', sets: 4, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=FWJR5Ve8bnQ' },
+            { name: 'Hammer Curls', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=TwD-YGVP4Bk' },
+            { name: 'Pull-Ups', sets: 3, reps: 8, videoUrl: 'https://www.youtube.com/watch?v=eGo4IYlbE5g' },
+            { name: 'Bicep Curls', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=in7PaeYlhrM' },
+            { name: 'Bodyweight Rows', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=8S9avO_vG6g' },
+            { name: 'Superman Exercise', sets: 3, reps: 15, videoUrl: 'https://www.youtube.com/watch?v=cc6UVRS7PW4' },
+            { name: 'Towel Rows', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=92YMbH5P2ro' },
+            { name: 'Reverse Snow Angels', sets: 3, reps: 15, videoUrl: 'https://www.youtube.com/watch?v=KIYj7Lj8ABg' },
+            { name: 'Chin-Ups', sets: 3, reps: 6, videoUrl: 'https://www.youtube.com/watch?v=brhRXlOhsAM' },
+            { name: 'Prone Y Raises', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=ZZR5RZLfFpU' },
+            { name: 'Plank Rows', sets: 3, reps: 8, videoUrl: 'https://www.youtube.com/watch?v=wSv2cPjOOUw' },
+            { name: 'Wall Push-Ups', sets: 3, reps: 15, videoUrl: 'https://www.youtube.com/watch?v=E5-7Xkj5P74' },
+            { name: 'Wide Push-Ups', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=jZx1sNrZbMg' },
+            { name: 'Scapular Pull-Ups', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=DBYgxQm6-Tg' },
           ], equipment),
         }
         ,
         {
           workout_type: 'Legs and Shoulders',
           exercises: filterExercisesByEquipment([
-            { name: 'Squats', sets: 4, reps: 10 },
-            { name: 'Shoulder Press', sets: 3, reps: 12 },
-            { name: 'Lunges', sets: 3, reps: 12 },
+            { name: 'Squats', sets: 4, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=aclHkVaku9U' },
+            { name: 'Shoulder Press', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=B-aVuyhvLHU' },
+            { name: 'Lunges', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=QOVaHwm-Q6U' },
           ], equipment),
         },
       ],
@@ -121,51 +120,51 @@ const GetStartedForm = () => {
         {
           workout_type: 'Chest and Triceps',
           exercises: filterExercisesByEquipment([
-            { name: 'Incline Press', sets: 3, reps: 10 },
-            { name: 'Close Grip Bench', sets: 3, reps: 10 },
-            { name: 'Dumbbell Kickbacks', sets: 3, reps: 12 },
-            { name: 'Tricep Dips', sets: 3, reps: 12 },
-            { name: 'Push-Ups', sets: 3, reps: 12 }, 
-            { name: 'Incline Push-Ups', sets: 3, reps: 12 },
-            { name: 'Dumbbell Flyes', sets: 3, reps: 12 },
-            { name: 'Dumbbell Chest Press', sets: 3, reps: 12 },
-            { name: 'Incline Dumbbell Press', sets: 3, reps: 12 },
-            { name: 'Chest Flyes', sets: 3, reps: 12 }, // added Chest Flyes for chest
+            { name: 'Incline Press', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=8iPEnn-ltC8' },
+            { name: 'Close Grip Bench', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=mDsbJcJ8rYc' },
+            { name: 'Dumbbell Kickbacks', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=6SS6K3lAwZ8' },
+            { name: 'Tricep Dips', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=0326dy_-CzM' },
+            { name: 'Push-Ups', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=_l3ySVKYVJ8' }, 
+            { name: 'Incline Push-Ups', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=R0qn-ql_g7E' },
+            { name: 'Dumbbell Flyes', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=eozdVDA78K0' },
+            { name: 'Dumbbell Chest Press', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=VmB1G1K7v94' },
+            { name: 'Incline Dumbbell Press', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=8iPEnn-ltC8' },
+            { name: 'Chest Flyes', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=QC1_5c8h6io' }, // added Chest Flyes for chest
           ], equipment),
         },
         {
           workout_type: 'Back and Biceps',
           exercises: filterExercisesByEquipment([
-            { name: 'Bent Rows', sets: 4, reps: 8 },
-            { name: 'Pull-Ups', sets: 3, reps: 10 },
-            { name: 'Concentration Curls', sets: 3, reps: 12 },
-            { name: 'Hammer Curls', sets: 3, reps: 12 },
-            { name: 'Diamond Push-ups', sets: 3, reps: 12 },
-            { name: 'Superman Exercise', sets: 3, reps: 12 },
-            { name: 'Plank to Push-Up', sets: 3, reps: 12 },
-            { name: 'Towel Curls', sets: 3, reps: 12 },
-            { name: 'Dumbbell Rows', sets: 3, reps: 12 },
-            { name: 'Dumbbell Reverse Flyes', sets: 3, reps: 12 },
-            { name: 'Barbell Curls', sets: 3, reps: 10 }, // added Barbell Curls for biceps
+            { name: 'Bent Rows', sets: 4, reps: 8, videoUrl: 'https://www.youtube.com/watch?v=DJT4CJeyK6k'  },
+            { name: 'Pull-Ups', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=eGo4IYlbE5g'  },
+            { name: 'Concentration Curls', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=soxrZlIl35U'  },
+            { name: 'Hammer Curls', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=zC3nLlEvin4'  },
+            { name: 'Diamond Push-ups', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=j0DnG1_S92I'  },
+            { name: 'Superman Exercise', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=cc6UVRS7PW4'  },
+            { name: 'Plank to Push-Up', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=Ow-2RIR5MHw'  },
+            { name: 'Towel Curls', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=H3mPCY3Rhts'  },
+            { name: 'Dumbbell Rows', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=pYcpY20QaE8'  },
+            { name: 'Dumbbell Reverse Flyes', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=6P5XJQcM3tE'  },
+            { name: 'Barbell Curls', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=kwG2ipFRgfo'  }, // added Barbell Curls for biceps
           ], equipment),
         },
         {
           workout_type: 'Shoulders and Abs',
           exercises: filterExercisesByEquipment([
-            { name: 'Lateral Raises', sets: 3, reps: 12 },
-            { name: 'Dumbbell Shoulder Press', sets: 3, reps: 12 },
-            { name: 'Dumbbell Russian Twists', sets: 3, reps: 12 },
-            { name: 'Dumbbell Crunches', sets: 3, reps: 12 },
-            { name: 'Shrugs', sets: 4, reps: 10 },
-            { name: 'Planks', sets: 3, reps: 1 }, // hold for 1 minute
+            { name: 'Lateral Raises', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=kDqklk1ZEsw'  },
+            { name: 'Dumbbell Shoulder Press', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=B-aVuyhvLHU'  },
+            { name: 'Dumbbell Russian Twists', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=wkD8rjkodUI'  },
+            { name: 'Dumbbell Crunches', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=H9IMU3kL9cE'  },
+            { name: 'Shrugs', sets: 4, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=KxgATENiHP0'  },
+            { name: 'Planks', sets: 3, reps: 1, videoUrl: 'https://www.youtube.com/watch?v=pSHjTRCQxIw'  }, // hold for 1 minute
           ], equipment),
         },
         {
           workout_type: 'Legs',
           exercises: filterExercisesByEquipment([
-            { name: 'Squats', sets: 4, reps: 10 },
-            { name: 'Deadlifts', sets: 3, reps: 10 },
-            { name: 'Lunges', sets: 3, reps: 12 },
+            { name: 'Squats', sets: 4, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=aclHkVaku9U' },
+            { name: 'Deadlifts', sets: 3, reps: 10, videoUrl: 'https://www.youtube.com/watch?v=op9kVnSso6Q' },
+            { name: 'Lunges', sets: 3, reps: 12, videoUrl: 'https://www.youtube.com/watch?v=op9kVnSso6Q' },
           ], equipment),
         },
       ],
@@ -315,7 +314,7 @@ const GetStartedForm = () => {
             </div>
           )}
 
-          {step === 2 && (
+{step === 2 && (
             <div>
               <h3 className="text-xl font-semibold mb-4">Step 2: Choose Your Equipment</h3>
 
@@ -362,15 +361,72 @@ const GetStartedForm = () => {
                 <button
                   type="button"
                   onClick={handleBack}
-                  className="px-6 py-2 bg-gray-600 rounded-md hover:bg-gray-700"
+                  className="px-6 py-2 bg-gray-500 rounded-md hover:bg-gray-600"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="px-6 py-2 bg-blue-500 rounded-md hover:bg-blue-600"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Step 3: Personal Info</h3>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Age</label>
+                <select
+                  name="age"
+                  value={formData.age}
+                  onChange={handleChange}
+                  className="w-full mt-2 px-4 py-2 bg-gray-800 text-white rounded-md"
+                >
+                  {generateOptions(18, 70)} {/* Age options from 18 to 70 */}
+                </select>
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Weight (kg)</label>
+                <input
+                  type="number"
+                  name="weight"
+                  value={formData.weight}
+                  onChange={handleChange}
+                  className="w-full mt-2 px-4 py-2 bg-gray-800 text-white rounded-md"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Height (cm)</label>
+                <input
+                  type="number"
+                  name="height"
+                  value={formData.height}
+                  onChange={handleChange}
+                  className="w-full mt-2 px-4 py-2 bg-gray-800 text-white rounded-md"
+                />
+              </div>
+
+              <div className="flex justify-between mt-6">
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className="px-6 py-2 bg-gray-500 rounded-md hover:bg-gray-600"
                 >
                   Back
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-blue-500 rounded-md hover:bg-blue-600"
+                  className="px-6 py-2 bg-green-500 rounded-md hover:bg-green-600"
                 >
-                  Generate Workout Plan
+                  Submit
                 </button>
               </div>
             </div>
@@ -382,11 +438,13 @@ const GetStartedForm = () => {
             <h3 className="text-xl font-semibold">Your Custom Workout Plan</h3>
             {workoutPlan.map((workout, index) => (
               <div key={index} className="mt-4">
-                <h4 className="text-lg font-bold">{workout.workout_type}</h4>
-                <ul className="list-disc pl-5">
-                  {workout.exercises.map((exercise, idx) => (
-                    <li key={idx}>
-                      {exercise.name}: {exercise.sets} sets of {exercise.reps} reps
+                <h4 className="text-lg font-semibold">{workout.workout_type}</h4>
+                <ul className="mt-2">
+                  {workout.exercises.map((exercise, index) => (
+                    <li key={index} className="mb-2">
+                      <a href={exercise.videoUrl} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
+                        {exercise.name}
+                      </a> - {exercise.sets} sets of {exercise.reps} reps
                     </li>
                   ))}
                 </ul>
