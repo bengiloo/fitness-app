@@ -36,12 +36,16 @@ const GetStartedForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Generate the actual workout for each day based on the user's input
+  
+    // Generate the workout plan
     const generatedPlan = generateUniqueWorkoutPlan(formData.availabilityDays, formData.equipment, formData.fitnessLevel);
     
     // Set the workout plan state
     setWorkoutPlan(generatedPlan);
+  
+    // Optionally, log form data and workout plan as JSON string
+    console.log("Form Data in JSON:", JSON.stringify(formData, null, 2));
+    console.log("Generated Workout Plan in JSON:", JSON.stringify(generatedPlan, null, 2));
   };
 
   // Fetching workout data from JSON and applying filters 
