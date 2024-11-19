@@ -73,14 +73,18 @@ const MealPlanUI = () => {
   });
 
   return (
-    <div style={mealPlanStyles.container}>
+    <div className="font-sans p-5 max-w-screen-md mx-auto bg-gray-900 text-white rounded-lg">
       {/* Filters Section */}
-      <div style={mealPlanStyles.filtersContainer}>
-        <h2 style={mealPlanStyles.filtersHeader}>Filter Your Meal Plan</h2>
-        <div style={mealPlanStyles.filtersGrid}>
-          <label style={mealPlanStyles.filterLabel}>
+      <div className="p-5 bg-gray-800 rounded-lg shadow-lg mb-5">
+        <h2 className="text-2xl mb-4 text-center text-white/80">Filter Your Meal Plan</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <label className="flex flex-col text-sm text-white">
             Meal Type:
-            <select value={selectedMealType} onChange={handleMealTypeChange} style={mealPlanStyles.filterSelect}>
+            <select
+              value={selectedMealType}
+              onChange={handleMealTypeChange}
+              className="mt-1 p-3 rounded-md bg-gray-700 text-white border border-gray-600"
+            >
               <option value="All">All Meal Types</option>
               <option value="Breakfast">Breakfast</option>
               <option value="Lunch">Lunch</option>
@@ -90,9 +94,13 @@ const MealPlanUI = () => {
             </select>
           </label>
 
-          <label style={mealPlanStyles.filterLabel}>
+          <label className="flex flex-col text-sm text-white">
             Diet:
-            <select value={selectedDiet} onChange={handleDietChange} style={mealPlanStyles.filterSelect}>
+            <select
+              value={selectedDiet}
+              onChange={handleDietChange}
+              className="mt-1 p-3 rounded-md bg-gray-700 text-white border border-gray-600"
+            >
               <option value="">Any Diet</option>
               <option value="balanced">Balanced</option>
               <option value="high-fiber">High-Fiber</option>
@@ -103,216 +111,147 @@ const MealPlanUI = () => {
             </select>
           </label>
 
-          <label style={mealPlanStyles.filterLabel}>
+          <label className="flex flex-col text-sm text-white">
             Health:
-            <select value={selectedHealth} onChange={handleHealthChange} style={mealPlanStyles.filterSelect}>
+            <select
+              value={selectedHealth}
+              onChange={handleHealthChange}
+              className="mt-1 p-3 rounded-md bg-gray-700 text-white border border-gray-600"
+            >
               <option value="">Any Health</option>
+              <option value="alcohol-cocktail">Alcohol-Cocktail</option>
               <option value="alcohol-free">Alcohol-Free</option>
+              <option value="salary-free">Salary-Free</option>
+              <option value="crustacean-free">Crustacean-Free</option>
               <option value="dairy-free">Dairy-Free</option>
+              <option value="DASH">DASH</option>
+              <option value="egg-free">Egg-Free</option>
+              <option value="fish-free">Fish-Free</option>
+              <option value="fodmap-free">Fodmap-Free</option>
               <option value="gluten-free">Gluten-Free</option>
+              <option value="immune-supportive">Immune-Supportive</option>
               <option value="keto-friendly">Keto-Friendly</option>
+              <option value="kidney-friendly">Kidney-Friendly</option>
+              <option value="kosher">Kosher</option>
+              <option value="low-fat-abs">Low-Fat-Abs</option>
+              <option value="low-potassium">Low-Potassium</option>
               <option value="low-sugar">Low-Sugar</option>
+              <option value="lupine-free">Lupine-Free</option>
+              <option value="Mediterranean">Mediterranean</option>
+              <option value="mollusk-free">Mollusk-Free</option>
+              <option value="mustard-free">Mustard-Free</option>
+              <option value="no-oil-added">No-Oil-Added</option>
+              <option value="paleo">Paleo</option>
+              <option value="peanut-free">Peanut-Free</option>
+              <option value="pescatarian">Pescatarian</option>
+              <option value="pork-free">Pork-Free</option>
+              <option value="red-meat-free">Red-Meat-Free</option>
+              <option value="sesame-free">Sesame-Free</option>
+              <option value="shellfish-free">Shellfish-Free</option>
+              <option value="soy-free">Soy-Free</option>
+              <option value="sugar-conscious">Sugar-Conscious</option>
+              <option value="sulfite-free">Sulfite-Free</option>
+              <option value="tree-nut-free">Tree-Nut-Free</option>
               <option value="vegan">Vegan</option>
               <option value="vegetarian">Vegetarian</option>
+              <option value="wheat-free">Wheat-Free</option>
             </select>
           </label>
 
-          <label style={mealPlanStyles.filterLabel}>
+          <label className="flex flex-col text-sm text-white">
             Cuisine Type:
-            <select value={selectedCuisineType} onChange={handleCuisineTypeChange} style={mealPlanStyles.filterSelect}>
+            <select
+              value={selectedCuisineType}
+              onChange={handleCuisineTypeChange}
+              className="mt-1 p-3 rounded-md bg-gray-700 text-white border border-gray-600"
+            >
               <option value="">Any Cuisine</option>
               <option value="American">American</option>
               <option value="Asian">Asian</option>
               <option value="British">British</option>
               <option value="Caribbean">Caribbean</option>
-              <option value="Central Europe">Central Europe</option>
+              <option value="Central-European">Central European</option>
               <option value="Chinese">Chinese</option>
-              <option value="Eastern Europe">Eastern Europe</option>
               <option value="French">French</option>
               <option value="Indian">Indian</option>
               <option value="Italian">Italian</option>
               <option value="Japanese">Japanese</option>
-              <option value="Kosher">Kosher</option>
               <option value="Mediterranean">Mediterranean</option>
               <option value="Mexican">Mexican</option>
               <option value="Middle Eastern">Middle Eastern</option>
               <option value="Nordic">Nordic</option>
-              <option value="South American">South American</option>
-              <option value="South East Asian">South East Asian</option>
+              <option value="South-American">South American</option>
             </select>
           </label>
 
-          <label style={mealPlanStyles.filterLabel}>
+          <label className="flex flex-col text-sm text-white">
             Dish Type:
-            <select value={selectedDishType} onChange={handleDishTypeChange} style={mealPlanStyles.filterSelect}>
-              <option value="">Any Dish</option>
-              <option value="biscuits and cookies">Biscuits and Cookies</option>
-              <option value="bread">Bread</option>
-              <option value="cereals">Cereals</option>
-              <option value="condiments and sauces">Condiments and Sauces</option>
-              <option value="desserts">Desserts</option>
-              <option value="drinks">Drinks</option>
+            <select
+              value={selectedDishType}
+              onChange={handleDishTypeChange}
+              className="mt-1 p-3 rounded-md bg-gray-700 text-white border border-gray-600"
+            >
+              <option value="">Any Dish Type</option>
               <option value="main course">Main Course</option>
-              <option value="pancake">Pancake</option>
-              <option value="salad">Salad</option>
-              <option value="sandwiches">Sandwiches</option>
-              <option value="side dish">Side Dish</option>
-              <option value="soup">Soup</option>
+              <option value="dessert">Dessert</option>
+              <option value="side">Side</option>
               <option value="starter">Starter</option>
-              <option value="sweets">Sweets</option>
+              <option value="snack">Snack</option>
             </select>
           </label>
 
-          <label style={mealPlanStyles.filterLabel}>
-            Calorie Range:
+          <label className="flex flex-col text-sm text-white">
+            Calories Range:
             <input
               type="text"
               value={caloriesRange}
               onChange={handleCaloriesRangeChange}
-              style={mealPlanStyles.filterInput}
-              placeholder="e.g. 100-150"
+              placeholder="e.g. 100-200"
+              className="mt-1 p-3 rounded-md bg-gray-700 text-white border border-gray-600"
             />
           </label>
-        </div>
 
-        <button onClick={fetchMealsFromAPI} style={mealPlanStyles.fetchButton}>
-          Fetch Meals
-        </button>
+          <div className="col-span-full">
+            <button
+              onClick={fetchMealsFromAPI}
+              className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none"
+            >
+              Apply Filters
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Displaying filtered meal plan */}
-      {filteredMealPlan.length === 0 ? (
-        <p style={{ color: "#fff", textAlign: "center" }}>No meals match the selected filters.</p>
-      ) : (
-        filteredMealPlan.map((dayPlan, dayIndex) => (
-          <div key={dayIndex} style={mealPlanStyles.daySection}>
-            <h2 style={mealPlanStyles.dayTitle}>{dayPlan.day}</h2>
-            <div style={mealPlanStyles.mealList}>
-              {dayPlan.meals.map((meal, mealIndex) => (
-                <div key={mealIndex} style={mealPlanStyles.mealCard}>
-                  <h3 style={mealPlanStyles.mealTitle}>{meal.title}</h3>
-                  <p style={mealPlanStyles.mealInfo}>Calories: {meal.kcal}</p>
-                  <p style={mealPlanStyles.mealInfo}>Protein: {meal.protein}g</p>
-                  <p style={mealPlanStyles.mealInfo}>Fat: {meal.fat}g</p>
-                  <p style={mealPlanStyles.mealInfo}>Carbs: {meal.carb}g</p>
-                  <p style={mealPlanStyles.mealInfo}>Meal Type: {meal.mealType}</p>
+      {/* Meal Plan */}
+      <div className="meal-plan">
+        <h2 className="text-3xl text-center text-white mb-5">Your Meal Plan</h2>
+        {filteredMealPlan.map((dayPlan) => (
+          <div key={dayPlan.day} className="day-plan mb-10">
+            <h3 className="text-2xl text-center text-white">{dayPlan.day}</h3>
+            <div className="meals">
+              {dayPlan.meals.map((meal, index) => (
+                <div key={index} className="meal mb-4 p-5 bg-gray-700 rounded-lg">
+                  <h4 className="text-xl">{meal.title}</h4>
+                  <p className="text-sm">
+                    <span className="font-semibold">Calories:</span> {meal.kcal} kcal
+                  </p>
+                  <p className="text-sm">
+                    <span className="font-semibold">Protein:</span> {meal.protein}g
+                  </p>
+                  <p className="text-sm">
+                    <span className="font-semibold">Fat:</span> {meal.fat}g
+                  </p>
+                  <p className="text-sm">
+                    <span className="font-semibold">Carbs:</span> {meal.carb}g
+                  </p>
                 </div>
               ))}
             </div>
           </div>
-        ))
-      )}
+        ))}
+      </div>
     </div>
   );
-};
-
-// Styles for the component
-const mealPlanStyles = {
-  container: {
-    fontFamily: "'Arial', sans-serif",
-    padding: "20px",
-    maxWidth: "900px",
-    margin: "0 auto",
-    backgroundColor: "#282c34",
-    color: "#fff",
-    borderRadius: "8px",
-  },
-
-  // Filter styles
-  filtersContainer: {
-    padding: "20px",
-    backgroundColor: "#1a1d2f",
-    borderRadius: "8px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    color: "#fff",
-    marginBottom: "20px",
-  },
-
-  filtersHeader: {
-    fontSize: "1.5em",
-    marginBottom: "10px",
-    textAlign: "center",
-    color: "#ffffffcc",
-  },
-
-  filtersGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "20px",
-  },
-
-  filterLabel: {
-    display: "flex",
-    flexDirection: "column",
-    fontSize: "0.9em",
-    color: "#fff",
-  },
-
-  filterSelect: {
-    marginTop: "5px",
-    padding: "10px",
-    borderRadius: "4px",
-    backgroundColor: "#2c2f42",
-    color: "#fff",
-    border: "1px solid #444",
-  },
-
-  filterInput: {
-    marginTop: "5px",
-    padding: "10px",
-    borderRadius: "4px",
-    backgroundColor: "#2c2f42",
-    color: "#fff",
-    border: "1px solid #444",
-  },
-
-  fetchButton: {
-    width: "100%",
-    padding: "12px",
-    backgroundColor: "#4CAF50",
-    color: "#fff",
-    border: "none",
-    borderRadius: "4px",
-    fontSize: "1em",
-    cursor: "pointer",
-    marginTop: "20px",
-  },
-
-  // Meal plan display styles
-  daySection: {
-    marginBottom: "20px",
-    padding: "10px",
-    backgroundColor: "#3a3f4f",
-    borderRadius: "8px",
-  },
-
-  dayTitle: {
-    fontSize: "1.2em",
-    marginBottom: "10px",
-  },
-
-  mealList: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "15px",
-  },
-
-  mealCard: {
-    padding: "10px",
-    backgroundColor: "#4b5161",
-    borderRadius: "8px",
-    textAlign: "center",
-  },
-
-  mealTitle: {
-    fontSize: "1.1em",
-    marginBottom: "10px",
-  },
-
-  mealInfo: {
-    fontSize: "0.9em",
-    margin: "5px 0",
-  },
 };
 
 export default MealPlanUI;
