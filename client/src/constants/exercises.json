@@ -19009,7 +19009,7 @@
   {
     "name": "Split Squats",
     "force": "push",
-    "level": "intermediate",
+    "level": "intermediate", 
     "mechanic": null,
     "equipment": null,
     "primaryMuscles": [
