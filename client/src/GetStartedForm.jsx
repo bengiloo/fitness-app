@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import exercisesData from './constants/exercises.json'; // Assuming the JSON file is here
+import axios from "axios";
 
 const GetStartedForm = () => {
   const [step, setStep] = useState(1);
@@ -34,18 +35,37 @@ const GetStartedForm = () => {
   const handleNext = () => setStep(step + 1);
   const handleBack = () => setStep(step - 1);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Generate the workout plan
     const generatedPlan = generateUniqueWorkoutPlan(formData.availabilityDays, formData.equipment, formData.fitnessLevel);
-    
+
     // Set the workout plan state
     setWorkoutPlan(generatedPlan);
-  
+
     // Optionally, log form data and workout plan as JSON string
     console.log("Form Data in JSON:", JSON.stringify(formData, null, 2));
     console.log("Generated Workout Plan in JSON:", JSON.stringify(generatedPlan, null, 2));
+
+    // Save to database
+    try {
+      const email = localStorage.getItem("userEmail");
+      if (!email) {
+        throw new Error("User email not found in localStorage");
+      }
+
+      const workoutPlanPayload = { email, generatedPlan };
+      const response = await axios.post("http://localhost:3000/api/workouts/save-workoutplan", workoutPlanPayload);
+
+      if (response.status === 201) {
+        console.log("Workout plan saved successfully!");
+      } else {
+        console.error("Failed to save workout plan.");
+      }
+    } catch (error) {
+      console.error("Error saving workout plan:", error);
+    }
   };
 
   // Fetching workout data from JSON and applying filters 
@@ -54,11 +74,11 @@ const GetStartedForm = () => {
       // Filter based on equipment selection
       let equipmentMatch = false;
       if (equipment.includes('No equipment (bodyweight only)')) {
-        equipmentMatch = ['Hyperextensions With No Hyperextension Bench', 'Russian Twist', 'Frog Sit-Ups', 'Gorilla Chin/Crunch','Rear Leg Raises', 'Star Jump', 'Step-up with Knee Raise', 'Wide-Grip Rear Pull-Up', 'Superman', 'Decline Push-Up', 'Push Up to Side Plank', 'Body Tricep Press', 'Push-Ups With Feet Elevated', 'Natural Glute Ham Raise', 'Push-Ups - Close Triceps Position','Russian Twist','Single-Arm Push-Up', 'Wide-Grip Rear Pull-Up', 'Split Squats', 'Sit Squats', 'Side Leg Raises', 'Reverse Crunch', 'Plyo Push-up', 'Plank', 'Oblique Crunches', 'Incline Push-Ups', 'Tricep Dips'].includes(exercise.name);
+        equipmentMatch = ['Hyperextensions With No Hyperextension Bench', 'Russian Twist', 'Frog Sit-Ups', 'Gorilla Chin/Crunch', 'Rear Leg Raises', 'Star Jump', 'Step-up with Knee Raise', 'Wide-Grip Rear Pull-Up', 'Superman', 'Decline Push-Up', 'Push Up to Side Plank', 'Body Tricep Press', 'Push-Ups With Feet Elevated', 'Natural Glute Ham Raise', 'Push-Ups - Close Triceps Position', 'Russian Twist', 'Single-Arm Push-Up', 'Wide-Grip Rear Pull-Up', 'Split Squats', 'Sit Squats', 'Side Leg Raises', 'Reverse Crunch', 'Plyo Push-up', 'Plank', 'Oblique Crunches', 'Incline Push-Ups', 'Tricep Dips'].includes(exercise.name);
       } else if (equipment.includes('Dumbbells only')) {
-        equipmentMatch = ['Leg-Over Floor Press', 'Middle Back Shrug', 'Wide Stance Barbell Squat', 'Bent Over Two-Dumbbell Row', 'Dumbbell Step Ups', 'Standing Dumbbell Calf Raise', 'Dumbbell Lunges', 'Dumbbell Squat', 'Decline Dumbbell Flyes', 'Middle Back Shrug', 'Bent Over Two-Dumbbell Row', 'Dumbbell Squat', 'Dumbbell Bench Press', 'Dumbbell Bicep Curl', 'Stiff-Legged Dumbbell Deadlift', 'Dumbbell Shoulder Press','Zottman Curl', 'Tate Press','Straight-Arm Dumbbell Pullover',].includes(exercise.name);
+        equipmentMatch = ['Leg-Over Floor Press', 'Middle Back Shrug', 'Wide Stance Barbell Squat', 'Bent Over Two-Dumbbell Row', 'Dumbbell Step Ups', 'Standing Dumbbell Calf Raise', 'Dumbbell Lunges', 'Dumbbell Squat', 'Decline Dumbbell Flyes', 'Middle Back Shrug', 'Bent Over Two-Dumbbell Row', 'Dumbbell Squat', 'Dumbbell Bench Press', 'Dumbbell Bicep Curl', 'Stiff-Legged Dumbbell Deadlift', 'Dumbbell Shoulder Press', 'Zottman Curl', 'Tate Press', 'Straight-Arm Dumbbell Pullover',].includes(exercise.name);
       } else if (equipment.includes('Access to full equipment (gym)')) {
-        equipmentMatch = ['Standing Low-Pulley One-Arm Triceps Extension', 'Lying T-Bar Row', 'Seated Calf Raise', 'Superman', 'Thigh Adductor', 'Glute Ham Raise', 'Barbell Lunge', 'Barbell Squat', 'Wide-Grip Standing Barbell Curl', 'Full Range-Of-Motion Lat Pulldown', 'Glute Ham Raise', 'Lunge Sprint','Decline Smith Press', 'Calf Press On The Leg Press Machine', 'Smith Machine Leg Press', 'Lying Close-Grip Bar Curl On High Pulley', 'Machine Shoulder (Military) Press', 'Ab Crunch Machine', 'Triceps Pushdown - V-Bar Attachment'].includes(exercise.name);
+        equipmentMatch = ['Standing Low-Pulley One-Arm Triceps Extension', 'Lying T-Bar Row', 'Seated Calf Raise', 'Superman', 'Thigh Adductor', 'Glute Ham Raise', 'Barbell Lunge', 'Barbell Squat', 'Wide-Grip Standing Barbell Curl', 'Full Range-Of-Motion Lat Pulldown', 'Glute Ham Raise', 'Lunge Sprint', 'Decline Smith Press', 'Calf Press On The Leg Press Machine', 'Smith Machine Leg Press', 'Lying Close-Grip Bar Curl On High Pulley', 'Machine Shoulder (Military) Press', 'Ab Crunch Machine', 'Triceps Pushdown - V-Bar Attachment'].includes(exercise.name);
       }
 
       // Filter based on fitness level selection
@@ -73,8 +93,8 @@ const GetStartedForm = () => {
       1: [
         {
           workout_type: 'Full Body',
-          exercises: filterExercises(equipment, fitnessLevel).filter(ex => 
-            ['Superman', 'Wide-Grip Standing Barbell Curl', 'Full Range-Of-Motion Lat Pulldown','Glute Ham Raise', 'Lunge Sprint', 'Middle Back Shrug', 'Natural Glute Ham Raise', 'Push-Ups - Close Triceps Position','Russian Twist','Single-Arm Push-Up','Wide-Grip Rear Pull-Up','Split Squats', 'Sit Squats', 'Side Leg Raises', 'Reverse Crunch', 'Plyo Push-up', 'Plank', 'Oblique Crunches', 'Dumbbell Bicep Curl', 'Dumbbell Bench Press', 'Dumbbell Squats', 'Bent Over Two-Dumbbell Row', 'Stiff-Legged Dumbbell Deadlift', 'Dumbbell Shoulder Press', 'Zottman Curl', 'Tate Press', 'Straight-Arm Dumbbell Pullover', 'Decline Smith Press', 'Calf Press On The Leg Press Machine','Smith Machine Leg Press', 'Lying Close-Grip Bar Curl On High Pulley', 'Machine Shoulder (Military) Press', 'Ab Crunch Machine', 'Triceps Pushdown - V-Bar Attachment',].includes(ex.name)
+          exercises: filterExercises(equipment, fitnessLevel).filter(ex =>
+            ['Superman', 'Wide-Grip Standing Barbell Curl', 'Full Range-Of-Motion Lat Pulldown', 'Glute Ham Raise', 'Lunge Sprint', 'Middle Back Shrug', 'Natural Glute Ham Raise', 'Push-Ups - Close Triceps Position', 'Russian Twist', 'Single-Arm Push-Up', 'Wide-Grip Rear Pull-Up', 'Split Squats', 'Sit Squats', 'Side Leg Raises', 'Reverse Crunch', 'Plyo Push-up', 'Plank', 'Oblique Crunches', 'Dumbbell Bicep Curl', 'Dumbbell Bench Press', 'Dumbbell Squats', 'Bent Over Two-Dumbbell Row', 'Stiff-Legged Dumbbell Deadlift', 'Dumbbell Shoulder Press', 'Zottman Curl', 'Tate Press', 'Straight-Arm Dumbbell Pullover', 'Decline Smith Press', 'Calf Press On The Leg Press Machine', 'Smith Machine Leg Press', 'Lying Close-Grip Bar Curl On High Pulley', 'Machine Shoulder (Military) Press', 'Ab Crunch Machine', 'Triceps Pushdown - V-Bar Attachment',].includes(ex.name)
           ),
         },
       ],
@@ -247,13 +267,13 @@ const GetStartedForm = () => {
                   onChange={handleChange}
                   className="w-full p-2 bg-gray-800 text-white rounded"
                 >
-                      <option value="1">1 Day per Week</option>
-                      <option value="2">2 Days per Week</option>
-                      <option value="3">3 Days per Week</option>
-                      <option value="4">4 Days per Week</option>
-                      <option value="5">5 Days per Week</option>
-                      <option value="6">6 Days per Week</option>
-                      <option value="7">7 Days per Week</option>
+                  <option value="1">1 Day per Week</option>
+                  <option value="2">2 Days per Week</option>
+                  <option value="3">3 Days per Week</option>
+                  <option value="4">4 Days per Week</option>
+                  <option value="5">5 Days per Week</option>
+                  <option value="6">6 Days per Week</option>
+                  <option value="7">7 Days per Week</option>
                 </select>
               </div>
 
@@ -273,20 +293,20 @@ const GetStartedForm = () => {
             <div>
               <h3 className="text-xl font-semibold mb-4">Step 2: Select Your Equipment</h3>
 
-             {/* Equipment */}
-<div className="mb-4">
-  <label className="block">Select your equipment</label>
-  <select
-    name="equipment"
-    value={formData.equipment}
-    onChange={handleChange}
-    className="w-full p-2 bg-gray-800 text-white rounded"
-  >
-    <option value="No equipment (bodyweight only)">No equipment (bodyweight only)</option>
-    <option value="Dumbbells only">Dumbbells only</option>
-    <option value="Access to full equipment (gym)">Access to full equipment (gym)</option>
-  </select>
-</div>
+              {/* Equipment */}
+              <div className="mb-4">
+                <label className="block">Select your equipment</label>
+                <select
+                  name="equipment"
+                  value={formData.equipment}
+                  onChange={handleChange}
+                  className="w-full p-2 bg-gray-800 text-white rounded"
+                >
+                  <option value="No equipment (bodyweight only)">No equipment (bodyweight only)</option>
+                  <option value="Dumbbells only">Dumbbells only</option>
+                  <option value="Access to full equipment (gym)">Access to full equipment (gym)</option>
+                </select>
+              </div>
 
 
               <div className="flex justify-between mt-6">
