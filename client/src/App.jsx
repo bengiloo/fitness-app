@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import Login from './Login';
@@ -6,6 +5,8 @@ import CreateAccount from './CreateAccount';
 import GetStartedForm from './GetStartedForm';
 import Dashboard from './Dashboard';
 import MealPlanUI from './MealPlanUI';
+import RecipeGenerator from './RecipeGenerator';
+import RecipeSearch from './RecipeSearch';
 
 const App = () => {
   return (
@@ -18,6 +19,8 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} /> {}
           <Route path="/get-started" element={<GetStartedForm />} />
           <Route path="/meal-plan" element={<MealPlanUI />} />
+          <Route path="/recipe-generator" element={<RecipeGenerator />}/>
+          <Route path="/recipe-search" element={<RecipeSearch />}/>
         </Routes>
       </Router>
     </div>
