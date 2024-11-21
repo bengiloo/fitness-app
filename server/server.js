@@ -4,10 +4,12 @@ const app = express();
 const connectDB = require('./database'); // connection to db
 const User = require('./Schema/User'); // User Schema for login credentials
 const RefreshToken = require('./Schema/RefreshTokens'); // Refresh token schema for User 
+const Meal = require('./Schema/MealPlan'); // Meal Plan Schema for User
 const bcrypt = require("bcrypt"); // hashing passwords
 const jwt = require("jsonwebtoken"); // JWTs
 const cors = require("cors"); // Cross-Origin Resource Sharing
 
+const mealRoutes = require('./Routes/MealPlanRoute');
 const OpenAI = require("openai");
 
 app.use(express.json());
@@ -268,6 +270,8 @@ app.get("/recipeStream", (req, res) => {
     }
   }
 
+// Meal Plan route
+app.use('/api/meals', mealRoutes);
 
 // Start the server on port 3000
 app.listen(3000, () => {
