@@ -85,7 +85,6 @@ const MealPlanUI = () => {
               onChange={handleMealTypeChange}
               className="mt-1 p-3 rounded-md bg-gray-700 text-white border border-gray-600"
             >
-              <option value="All">All Meal Types</option>
               <option value="Breakfast">Breakfast</option>
               <option value="Lunch">Lunch</option>
               <option value="Dinner">Dinner</option>
@@ -121,7 +120,7 @@ const MealPlanUI = () => {
               <option value="">Any Health</option>
               <option value="alcohol-cocktail">Alcohol-Cocktail</option>
               <option value="alcohol-free">Alcohol-Free</option>
-              <option value="salary-free">Salary-Free</option>
+              <option value="celery-free">Celery-Free</option>
               <option value="crustacean-free">Crustacean-Free</option>
               <option value="dairy-free">Dairy-Free</option>
               <option value="DASH">DASH</option>
@@ -129,7 +128,7 @@ const MealPlanUI = () => {
               <option value="fish-free">Fish-Free</option>
               <option value="fodmap-free">Fodmap-Free</option>
               <option value="gluten-free">Gluten-Free</option>
-              <option value="immune-supportive">Immune-Supportive</option>
+              <option value="immuno-supportive">Immuno-Supportive</option>
               <option value="keto-friendly">Keto-Friendly</option>
               <option value="kidney-friendly">Kidney-Friendly</option>
               <option value="kosher">Kosher</option>
@@ -165,22 +164,24 @@ const MealPlanUI = () => {
               onChange={handleCuisineTypeChange}
               className="mt-1 p-3 rounded-md bg-gray-700 text-white border border-gray-600"
             >
-              <option value="">Any Cuisine</option>
               <option value="American">American</option>
               <option value="Asian">Asian</option>
               <option value="British">British</option>
               <option value="Caribbean">Caribbean</option>
-              <option value="Central-European">Central European</option>
+              <option value="Central Europe">Central Europe</option>
               <option value="Chinese">Chinese</option>
+              <option value="Eastern Europe">Eastern Europe</option>
               <option value="French">French</option>
               <option value="Indian">Indian</option>
               <option value="Italian">Italian</option>
               <option value="Japanese">Japanese</option>
+              <option value="Kosher">Kosher</option>
               <option value="Mediterranean">Mediterranean</option>
               <option value="Mexican">Mexican</option>
               <option value="Middle Eastern">Middle Eastern</option>
               <option value="Nordic">Nordic</option>
-              <option value="South-American">South American</option>
+              <option value="South American">South American</option>
+              <option value="South East Asian">South East Asian</option>
             </select>
           </label>
 
@@ -191,12 +192,22 @@ const MealPlanUI = () => {
               onChange={handleDishTypeChange}
               className="mt-1 p-3 rounded-md bg-gray-700 text-white border border-gray-600"
             >
-              <option value="">Any Dish Type</option>
-              <option value="main course">Main Course</option>
-              <option value="dessert">Dessert</option>
-              <option value="side">Side</option>
-              <option value="starter">Starter</option>
-              <option value="snack">Snack</option>
+              <option value="Biscuits and cookies">Biscuits and cookies</option>
+              <option value="Bread">Bread</option>
+              <option value="Cereals">Cereals</option>
+              <option value="Condiments and sauces">Condiments and sauces</option>
+              <option value="Desserts">Desserts</option>
+              <option value="Drinks">Drinks</option>
+              <option value="Main course">Main course</option>
+              <option value="Pancake">Pancake</option>
+              <option value="Preps">Preps</option>
+              <option value="Preserve">Preserve</option>
+              <option value="Salad">Salad</option>
+              <option value="Sandwiches">Sandwiches</option>
+              <option value="Side dish">Side dish</option>
+              <option value="Soup">Soup</option>
+              <option value="Starter">Starter</option>
+              <option value="Sweets">Sweets</option>
             </select>
           </label>
 
