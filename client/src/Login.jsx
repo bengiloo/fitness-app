@@ -21,6 +21,9 @@ const Login = () => {
         password
       });
       setUser(res.data);
+      // Here store user email in local storage
+      console.log(res.data.email);
+      localStorage.setItem('userEmail', res.data.email);
       setSuccess(true);
       navigate('/dashboard');
     } catch (err) {
@@ -34,7 +37,7 @@ const Login = () => {
       <div className="w-full max-w-sm p-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg shadow-2xl ring-4 ring-blue-500 ring-opacity-50">
         <div className="w-full max-w-sm p-8 bg-black rounded-lg shadow-md">
           <h2 className="text-2xl font-bold text-center text-white-700 mb-6">Login to Your Account</h2>
-          
+
           <form onSubmit={handleSubmit}>
             {/* Email Input */}
             <div className="mb-4">
