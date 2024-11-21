@@ -10,6 +10,7 @@ const jwt = require("jsonwebtoken"); // JWTs
 const cors = require("cors"); // Cross-Origin Resource Sharing
 
 const mealRoutes = require('./Routes/MealPlanRoute');
+const workoutRoutes = require('./Routes/WorkoutPlanRoute')
 const OpenAI = require("openai");
 
 app.use(express.json());
@@ -270,8 +271,9 @@ app.get("/recipeStream", (req, res) => {
     }
   }
 
-// Meal Plan route
+// API Routes
 app.use('/api/meals', mealRoutes);
+app.use('/api/workouts', workoutRoutes);
 
 // Start the server on port 3000
 app.listen(3000, () => {
