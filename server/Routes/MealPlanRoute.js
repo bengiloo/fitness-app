@@ -19,8 +19,8 @@ router.post("/fetch-meal", async (req, res) => {
     // Construct query parameters
     const params = {
       type: "public",
-      app_id: "API ID GOES HERE", // API ID
-      app_key: "API KEY GOES HERE", // API Key
+      app_id: process.env.APP_ID, // API ID
+      app_key: process.env.API_KEY, // API Key
       diet,
       health,
       cuisineType,
@@ -31,7 +31,7 @@ router.post("/fetch-meal", async (req, res) => {
     // construct headers
     const headers = {
       Accept: "application/json",
-      "Edamam-Account-User": "API USER GOES HERE",
+      "Edamam-Account-User": process.env.USER_ID,
       "Accept-Language": "en",
     };
 
@@ -48,7 +48,7 @@ router.post("/fetch-meal", async (req, res) => {
 router.post("/save-mealplan", async (req, res) => {
   try {
     const email = req.body.email;
-    console.log(email)
+    console.log(email);
   
     const user = await User.findOne({ email }); // Find user in db
     
