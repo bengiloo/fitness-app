@@ -1,4 +1,4 @@
-// require('dotenv').config(); // enable it in your machine with your .env file
+require('dotenv').config(); // enable it in your machine with your .env file
 const express = require("express");
 const app = express();
 const connectDB = require('./database'); // connection to db
@@ -37,7 +37,7 @@ const verify = (req, res, next) => {
 
 // Generate access tokens
 const generateAccessToken = (user) => {
-    return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "MysecretKey", { expiresIn: "10m" });3
+    return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "MysecretKey", { expiresIn: "10m" });
 };
 
 // Generate refresh tokens
@@ -247,7 +247,7 @@ app.get("/recipeStream", (req, res) => {
   });
   
   async function fetchOpenAICompletionsStream(messages, callback) {
-    const OPENAI_API_KEY = "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";
+    const OPENAI_API_KEY = process.env.OPENAI_KEY;
     const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
   
     const aiModel = "gpt-4-1106-preview";
