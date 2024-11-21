@@ -5,6 +5,7 @@ import Login from './Login';
 import CreateAccount from './CreateAccount';
 import GetStartedForm from './GetStartedForm';
 import Dashboard from './Dashboard';
+import MealPlanUI from './MealPlanUI';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/dashboard" element={<Dashboard />} /> {}
           <Route path="/get-started" element={<GetStartedForm />} />
+          <Route path="/meal-plan" element={<MealPlanUI />} />
         </Routes>
       </Router>
     </div>
