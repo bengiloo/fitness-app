@@ -1,34 +1,9 @@
-import React, { useState } from "react";
-
-// Sample initial meal plan data (you would replace this with API data later)
-const mealPlanData = [
-  {
-    day: "Day 1",
-    meals: [
-      { title: "Citrus Oatmeal", kcal: 466, protein: 19, fat: 11, carb: 76, mealType: "Breakfast" },
-      { title: "Caramel Apple Pork Chops", kcal: 500, protein: 42, fat: 28, carb: 17, mealType: "Lunch" },
-      { title: "Raspberry-Almond Jelly Roll", kcal: 500, protein: 7, fat: 28, carb: 56, mealType: "Dinner" },
-    ],
-  },
-  {
-    day: "Day 2",
-    meals: [
-      { title: "Fruit-and-Nut Peanut Butter Bites", kcal: 466, protein: 11, fat: 27, carb: 51, mealType: "Breakfast" },
-      { title: "Bihari Kabab", kcal: 500, protein: 35, fat: 36, carb: 6, mealType: "Lunch" },
-      { title: "Roasted Garlic-Herb Mushrooms", kcal: 499, protein: 10, fat: 34, carb: 50, mealType: "Dinner" },
-    ],
-  },
-  {
-    day: "Day 3",
-    meals: [
-      { title: "Berry Smoothie Bowl", kcal: 350, protein: 12, fat: 15, carb: 42, mealType: "Breakfast" },
-    ],
-  },
-];
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const MealPlanUI = () => {
   // State for meal plan data
-  const [mealPlan, setMealPlan] = useState(mealPlanData);
+  const [mealPlan, setMealPlan] = useState([]);
 
   // State for filter controls
   const [selectedMealType, setSelectedMealType] = useState("All");
@@ -37,6 +12,10 @@ const MealPlanUI = () => {
   const [selectedCuisineType, setSelectedCuisineType] = useState("");
   const [selectedDishType, setSelectedDishType] = useState("");
   const [caloriesRange, setCaloriesRange] = useState("");
+
+  useEffect(() => {
+    console.log("mealPlan updated: ", mealPlan);
+  }, [mealPlan]);
 
   // Function to handle changes in filters
   const handleMealTypeChange = (event) => setSelectedMealType(event.target.value);
@@ -47,30 +26,86 @@ const MealPlanUI = () => {
   const handleCaloriesRangeChange = (event) => setCaloriesRange(event.target.value);
 
   // Function to fetch meal data based on filters (Simulated here with sample data)
-  const fetchMealsFromAPI = () => {
+  const fetchMealsFromAPI = async () => {
+    const email = localStorage.getItem("userEmail");
+    if (!email) {
+      throw new Error("User email not found in localStorage");
+    }
+
+    // Use this to call the backend for the api
     const queryParams = {
       diet: selectedDiet,
       health: selectedHealth,
       cuisineType: selectedCuisineType,
       mealType: selectedMealType,
-      dishType: selectedDishType,
+      dishType: selectedDishType, // Do not include this
       calories: caloriesRange,
     };
 
+    // api call (edamame):
+    const response = await axios.post("http://localhost:3000/api/meals/fetch-meal", {
+      queryParams
+    });
+
+    // Debug purposes:
+    console.log("Fetched Meal data from front end:", response);
+    const mealPlanData = [];
+
+    // display data to the console for debugging purposes:
+    for (let i = 0; i < 7; i++) {
+      const mealName = response.data.hits[i].recipe.label;
+      const typeOfMeal = response.data.hits[i].recipe.cuisineType[0];
+      const fats = response.data.hits[i].recipe.digest[0].total.toFixed(2);
+      const carbs = response.data.hits[i].recipe.digest[1].total.toFixed(2);
+      const protein = response.data.hits[i].recipe.digest[2].total.toFixed(2);
+      const calories = response.data.hits[i].recipe.calories.toFixed(2);
+      console.log(`Meal ${i + 1}`);
+      console.log(`Meal Name: ${mealName}`);
+      console.log(`Type of Meal: ${typeOfMeal}`);
+      console.log(`Fats: ${fats}`);
+      console.log(`Carbs: ${carbs}`);
+      console.log(`Protein: ${protein}`);
+      console.log(`Calories: ${calories}`);
+      console.log("\n");
+
+      // Push a meal to the mealplan list
+      mealPlanData.push({
+        mealName,
+        typeOfMeal,
+        nutrients: {
+          fats,
+          carbs,
+          protein,
+          calories
+        }
+      });
+
+    }
+    // Save meal plan data to db:
+    const mealPlanPayload = { email, mealPlanData };
+    const saveMealPlanResponse = await axios.post("http://localhost:3000/api/meals/save-mealplan", mealPlanPayload);
+
+    if (saveMealPlanResponse.status < 200 || saveMealPlanResponse.status >= 300) {
+      throw new Error("Failed to save meal plan");
+    }
+
+    //Debug lines:
+    console.log("This is the user's email: ", email);
     console.log("Fetching meals with the following filters:", queryParams);
-    // Simulated API call
-    // setMealPlan(fetchedMealsData);
+    setMealPlan(mealPlanData);
   };
 
   // Filter the meal plan based on selected filters
-  const filteredMealPlan = mealPlan.filter((dayPlan) => {
-    const filteredMeals = dayPlan.meals.filter((meal) => {
+  const filteredMealPlan = mealPlan
+  .map((dayPlan) => {
+    const filteredMeals = (dayPlan.meals || []).filter((meal) => {
       const mealTypeMatch = selectedMealType === "All" || selectedMealType === meal.mealType;
       return mealTypeMatch;
     });
 
-    return filteredMeals.length > 0; // Only include days with filtered meals
-  });
+    return { ...dayPlan, meals: filteredMeals };
+  })
+  .filter((dayPlan) => dayPlan.meals.length > 0);
 
   return (
     <div className="font-sans p-5 max-w-screen-md mx-auto bg-gray-900 text-white rounded-lg">
@@ -236,30 +271,32 @@ const MealPlanUI = () => {
       {/* Meal Plan */}
       <div className="meal-plan">
         <h2 className="text-3xl text-center text-white mb-5">Your Meal Plan</h2>
-        {filteredMealPlan.map((dayPlan) => (
-          <div key={dayPlan.day} className="day-plan mb-10">
-            <h3 className="text-2xl text-center text-white">{dayPlan.day}</h3>
-            <div className="meals">
-              {dayPlan.meals.map((meal, index) => (
-                <div key={index} className="meal mb-4 p-5 bg-gray-700 rounded-lg">
-                  <h4 className="text-xl">{meal.title}</h4>
-                  <p className="text-sm">
-                    <span className="font-semibold">Calories:</span> {meal.kcal} kcal
-                  </p>
-                  <p className="text-sm">
-                    <span className="font-semibold">Protein:</span> {meal.protein}g
-                  </p>
-                  <p className="text-sm">
-                    <span className="font-semibold">Fat:</span> {meal.fat}g
-                  </p>
-                  <p className="text-sm">
-                    <span className="font-semibold">Carbs:</span> {meal.carb}g
-                  </p>
-                </div>
-              ))}
-            </div>
+        {mealPlan.length > 0 ? (
+          <div>
+            {mealPlan.map((meal, index) => (
+              <div key={index} className="meal mb-6 p-5 bg-gray-700 rounded-lg">
+                <h3 className="text-2xl text-blue-300">{meal.mealName}</h3>
+                <p className="text-sm text-gray-300">
+                  <strong>Type of Meal:</strong> {meal.typeOfMeal}
+                </p>
+                <p className="text-sm text-gray-300">
+                  <strong>Fats:</strong> {meal.nutrients.fats}g
+                </p>
+                <p className="text-sm text-gray-300">
+                  <strong>Carbs:</strong> {meal.nutrients.carbs}g
+                </p>
+                <p className="text-sm text-gray-300">
+                  <strong>Protein:</strong> {meal.nutrients.protein}g
+                </p>
+                <p className="text-sm text-gray-300">
+                  <strong>Calories:</strong> {meal.nutrients.calories} kcal
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
+        ) : (
+          <p className="text-center text-gray-400">No meals available. Try applying filters or fetching meals.</p>
+        )}
       </div>
     </div>
   );
