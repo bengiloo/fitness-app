@@ -8,10 +8,10 @@ const Meal = require('./Schema/MealPlan'); // Meal Plan Schema for User
 const bcrypt = require("bcrypt"); // hashing passwords
 const jwt = require("jsonwebtoken"); // JWTs
 const cors = require("cors"); // Cross-Origin Resource Sharing
+const OpenAI = require("openai");
 
 const mealRoutes = require('./Routes/MealPlanRoute');
-const workoutRoutes = require('./Routes/WorkoutPlanRoute')
-const OpenAI = require("openai");
+const workoutRoutes = require('./Routes/WorkoutPlanRoute');
 
 app.use(express.json());
 app.use(cors());
