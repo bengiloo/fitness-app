@@ -11,11 +11,11 @@ router.post("/fetch-meal", async (req, res) => {
   // console.log('POST request received at /fetch-meal');
   try {
     // parameters
-    const { diet, health, cuisineType, mealType, calories } = req.body;
+    const { diet, health, cuisineType, mealType, calories } = req.body.queryParams;
 
     // API endpoint
     const edamamUrl = "https://api.edamam.com/api/recipes/v2";
-    
+    console.log("Hello from meal routes");
     // Construct query parameters
     const params = {
       type: "public",
@@ -27,6 +27,9 @@ router.post("/fetch-meal", async (req, res) => {
       mealType,
       calories
     };
+
+    // debug line
+    console.log(params);
 
     // construct headers
     const headers = {
@@ -47,25 +50,28 @@ router.post("/fetch-meal", async (req, res) => {
 
 router.post("/save-mealplan", async (req, res) => {
   try {
+    // get user's email
     const email = req.body.email;
     console.log(email);
-  
-    const user = await User.findOne({ email }); // Find user in db
-    
-    if (!user) return res.status(404).send("User not found.");
-    
-    const userId = user.id;
-    
-    const mealPlanData = req.body.mealPlanData;
-    
-    // create new meal plan document
-    const newMealPlan = new Meal({
-      userId,
-      mealPlanData, 
-    });
-    await newMealPlan.save(); // save meal plan to user's database
 
-    res.status(201).send("Meal plan saved successfully!");
+    // Find user in db
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).send("User not found.");
+
+
+    // Get teh id to reference mealplan
+    const userId = user.id;
+    const mealPlanData = req.body.mealPlanData;
+
+    // Update collection
+    //TODO: Test if it can insert if no meal plan exists
+    const updatedMealPlan = await Meal.findOneAndUpdate(
+      { userId }, 
+      { userId, mealPlanData }, 
+      { new: true, upsert: true }
+    );
+
+    res.status(200).send("Meal plan saved successfully!");
   } catch (error) {
     console.error(error);
     res.status(500).send("Server error while saving the meal plan.");
