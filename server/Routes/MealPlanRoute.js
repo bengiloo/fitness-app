@@ -66,8 +66,8 @@ router.post("/save-mealplan", async (req, res) => {
     // Update collection
     //TODO: Test if it can insert if no meal plan exists
     const updatedMealPlan = await Meal.findOneAndUpdate(
-      { userId }, 
-      { userId, mealPlanData }, 
+      { userId },
+      { userId, mealPlanData },
       { new: true, upsert: true }
     );
 
@@ -75,6 +75,29 @@ router.post("/save-mealplan", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Server error while saving the meal plan.");
+  }
+});
+
+router.post("/display-mealplan", async (req, res) => {
+  try {
+    // Get user's email
+    const email = req.body.email;
+    console.log("display-mealplan from backend: ", email);
+
+    // Find user in db
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found." });
+
+    // Use the user's ID to find their meal plan
+    const mealPlan = await Meal.findOne({ userId: user.id }); // Corrected query
+    if (!mealPlan) return res.status(404).json({ message: "Meal plan not found." });
+    console.log("The mealPlan from the backend: ", mealPlan);
+
+    // Send meal plan data to the frontend
+    res.status(200).send(mealPlan); // Send the meal plan as a JSON response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error while fetching the meal plan." });
   }
 });
 
