@@ -28,35 +28,4 @@ router.post("/save-workoutplan", async (req, res) => {
     res.status(500).json({ error: "Failed to save workout plan." });
   }
 });
-
-// router.post("/save-workoutplan", async (req, res) => {
-//   try {
-//     const email = req.body.email;
-//     console.log("Email from save-workoutplan route", email);
-
-//     const user = await User.findOne({ email });
-//     if (!user) return res.status(404).send("User not found.");
-
-//     const userId = user.id;
-//     // console.log("user ID from save-workoutplan", userId);
-
-//     const plan = req.body.generatedPlan;
-//     // console.log("Workoutplan from save-workoutplan", plan);
-
-//     // Create document
-//     const newWorkoutPlan = new WorkoutPlan({
-//       userId,
-//       plan, 
-//     });
-
-//     // Save document to database
-//     await newWorkoutPlan.save();
-
-//     res.status(201).json({ message: "Workout plan saved successfully!" });
-//   } catch (error) {
-//     console.error("Error saving workout plan:", error);
-//     res.status(500).json({ error: "Failed to save workout plan." });
-//   }
-// });
-
 module.exports = router;
