@@ -4,6 +4,7 @@ import Features from "./components/Features.jsx";
 import HowItWorks from "./components/HowItWorks.jsx";
 
 const LandingPage = () => {
+  localStorage.clear();
   return (
     <div className="bg-gradient-to-br from-[#01030f] to-[#001f3f] min-h-screen">
       <Navbar />
