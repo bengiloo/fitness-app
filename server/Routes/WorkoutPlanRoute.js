@@ -15,11 +15,11 @@ router.post("/save-workoutplan", async (req, res) => {
     const userId = user.id;
     const plan = req.body.generatedPlan;
 
-    // Upsert (update if exists, insert if not) the workout plan for the user
+    // update if exists, insert if not
     const updatedWorkoutPlan = await WorkoutPlan.findOneAndUpdate(
-      { userId }, // Find a workout plan document by the userId
-      { userId, plan }, // Update or set these fields
-      { new: true, upsert: true } // Options: return the updated document and create if not exists
+      { userId },
+      { userId, plan },
+      { new: true, upsert: true }
     );
 
     res.status(200).json({ message: "Workout plan saved successfully!" });
@@ -28,4 +28,28 @@ router.post("/save-workoutplan", async (req, res) => {
     res.status(500).json({ error: "Failed to save workout plan." });
   }
 });
+
+router.post("/display-workoutplan", async (req, res) => {
+  try {
+    // Get user's email
+    const email = req.body.email;
+    console.log("display-workoutplan from backend: ", email);
+
+    // Find user in db
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found." });
+
+    // Use the user's ID to find their workout plan
+    const workoutPlanData = await WorkoutPlan.findOne({ userId: user.id });
+    if (!workoutPlanData) return res.status(404).json({ message: "Workout plan not found." });
+    console.log("The workoutPlan from the backend: ", workoutPlanData);
+
+    // Send workout plan data to the frontend
+    res.status(200).send(workoutPlanData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error while fetching the workout plan." });
+  }
+});
+
 module.exports = router;
