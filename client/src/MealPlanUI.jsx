@@ -4,6 +4,7 @@ import axios from "axios";
 const MealPlanUI = () => {
   // State for meal plan data
   const [mealPlan, setMealPlan] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // State for filter controls
   const [selectedMealType, setSelectedMealType] = useState("All");
@@ -14,8 +15,26 @@ const MealPlanUI = () => {
   const [caloriesRange, setCaloriesRange] = useState("");
 
   useEffect(() => {
-    console.log("mealPlan updated: ", mealPlan);
-  }, [mealPlan]);
+    const fetchMealPlans = async () => {
+      try {
+        const email = localStorage.getItem("userEmail");
+        if (!email) {
+          throw new Error("User email not found in localStorage");
+        }
+        const response = await axios.post("http://localhost:3000/api/meals/display-mealplan", { email });
+
+        // console.log("The response from the frontend: ", response.data.mealPlanData);
+        setMealPlan(response.data.mealPlanData);
+        // debug:
+        console.log("use effect: ", mealPlan);
+      } catch (error) {
+        console.error("Error fetching meal plans:", error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMealPlans();
+  }, []);
 
   // Function to handle changes in filters
   const handleMealTypeChange = (event) => setSelectedMealType(event.target.value);
@@ -97,15 +116,15 @@ const MealPlanUI = () => {
 
   // Filter the meal plan based on selected filters
   const filteredMealPlan = mealPlan
-  .map((dayPlan) => {
-    const filteredMeals = (dayPlan.meals || []).filter((meal) => {
-      const mealTypeMatch = selectedMealType === "All" || selectedMealType === meal.mealType;
-      return mealTypeMatch;
-    });
+    .map((dayPlan) => {
+      const filteredMeals = (dayPlan.meals || []).filter((meal) => {
+        const mealTypeMatch = selectedMealType === "All" || selectedMealType === meal.mealType;
+        return mealTypeMatch;
+      });
 
-    return { ...dayPlan, meals: filteredMeals };
-  })
-  .filter((dayPlan) => dayPlan.meals.length > 0);
+      return { ...dayPlan, meals: filteredMeals };
+    })
+    .filter((dayPlan) => dayPlan.meals.length > 0);
 
   return (
     <div className="font-sans p-5 max-w-screen-md mx-auto bg-gray-900 text-white rounded-lg">
