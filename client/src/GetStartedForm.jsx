@@ -58,11 +58,6 @@ const GetStartedForm = () => {
       const workoutPlanPayload = { email, generatedPlan };
       const response = await axios.post("http://localhost:3000/api/workouts/save-workoutplan", workoutPlanPayload);
 
-      if (response.status === 201) {
-        console.log("Workout plan saved successfully!");
-      } else {
-        console.error("Failed to save workout plan.");
-      }
     } catch (error) {
       console.error("Error saving workout plan:", error);
     }
