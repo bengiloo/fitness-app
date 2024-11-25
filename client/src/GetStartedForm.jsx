@@ -352,38 +352,45 @@ const GetStartedForm = () => {
           )}
         </form>
 
-        {workoutPlan.length > 0 && (
-          <div className="mt-8 space-y-6">
-            {workoutPlan.map((workout, index) => (
-              <div key={index}>
-                <h3 className="text-2xl font-sans mb-4">{workout.workout_type}</h3>
-                <div className="space-y-4">
-                  {workout.exercises.map((exercise, i) => (
-                    <div key={i} className="border-b border-gray-700 pb-4">
-                      <h4 className="text-lg font-sans">{exercise.name}</h4>
-                      <p>{exercise.sets} sets of {exercise.reps} reps</p>
+        {workoutPlan.length > 0 ? (
+  <div className="mt-8 space-y-6">
+    {workoutPlan.map((workout, index) => (
+      <div key={index}>
+        <h3 className="text-2xl font-sans mb-4">{workout.workout_type}</h3>
+        <div className="space-y-4">
+          {workout.exercises.map((exercise, i) => (
+            <div key={i} className="border-b border-gray-700 pb-4">
+              <h4 className="text-lg font-sans">{exercise.name}</h4>
+              <p>{exercise.sets} sets of {exercise.reps} reps</p>
 
-                      <button
-                        onClick={() => toggleInstruction(exercise.name)}
-                        className="text-blue-400 hover:underline mt-2"
-                      >
-                        {expandedExercise === exercise.name ? 'Hide Instructions' : 'Show Instructions'}
-                      </button>
+              <button
+                onClick={() => toggleInstruction(exercise.name)}
+                className="text-blue-400 hover:underline mt-2"
+              >
+                {expandedExercise === exercise.name ? 'Hide Instructions' : 'Show Instructions'}
+              </button>
 
-                      {expandedExercise === exercise.name && (
-                        <ul className="mt-4 space-y-2 list-inside">
-                          {exercise.instructions.map((instruction, idx) => (
-                            <li key={idx} className="text-sm text-gray-300">{instruction}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
+              {expandedExercise === exercise.name && (
+                <ul className="mt-4 space-y-2 list-inside">
+                  {exercise.instructions.map((instruction, idx) => (
+                    <li key={idx} className="text-sm text-gray-300">{instruction}</li>
                   ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+) : (
+  <div className="mt-8">
+  {/* Adding the new heading above the fallback message */}
+  <h2 className="text-3xl text-center text-white mb-5">Your Meal Plan</h2>
+  <div className="text-center text-gray-400"> No workout available. Try applying the filters or fetching workout plan.
+  </div>
+  </div>
+)}
       </div>
     </div>
   );
