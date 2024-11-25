@@ -199,19 +199,19 @@ const GetStartedForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="w-full max-w-lg p-6 bg-black rounded-lg shadow-lg">
+    <div className="min-h-screen flex items-center justify-center text-white">
+    <div className="w-full max-w-lg p-6 bg-gray-900 rounded-lg shadow-lg overflow-y-auto max-h-screen">
         <div className="text-center mb-6">
           <Link to="/" className="text-blue-500 hover:underline">
             &larr; Back to Home
           </Link>
         </div>
 
-        <h2 className="text-2xl font-bold mb-4">Create Your Custom Workout Plan</h2>
+        <h2 className="text-2xl font-sans mb-4 text-center text-white/80">Create Your Custom Workout Plan</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {step === 1 && (
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Step 1: Fitness Level & Goals</h3>
+            <div className="p-5 bg-gray-800 rounded-lg shadow-lg mb-5">
+              <h3 className="text-xl font-sans mb-4 text-center text-white/80">Step 1: Fitness Level & Goals</h3>
 
               {/* Fitness Level */}
               <div className="mb-4">
@@ -230,51 +230,55 @@ const GetStartedForm = () => {
               </div>
 
               {/* Fitness Goals */}
-              <div className="mb-4">
-                <label className="block">Fitness Goals</label>
-                <div className="space-y-2">
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="fitnessGoals"
-                      value="muscleGain"
-                      checked={formData.fitnessGoals.includes('muscleGain')}
-                      onChange={handleChange}
-                    />
-                    Muscle Gain
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="fitnessGoals"
-                      value="weightLoss"
-                      checked={formData.fitnessGoals.includes('weightLoss')}
-                      onChange={handleChange}
-                    />
-                    Weight Loss
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="fitnessGoals"
-                      value="strength"
-                      checked={formData.fitnessGoals.includes('strength')}
-                      onChange={handleChange}
-                    />
-                    Strength
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="fitnessGoals"
-                      value="endurance"
-                      checked={formData.fitnessGoals.includes('endurance')}
-                      onChange={handleChange}
-                    />
-                    Endurance
-                  </label>
-                </div>
-              </div>
+<div className="mb-4">
+  <label className="block">Fitness Goals</label>
+  <div className="space-y-2">
+    <label className="flex items-center text-white">
+      <input
+        type="checkbox"
+        name="fitnessGoals"
+        value="muscleGain"
+        checked={formData.fitnessGoals.includes('muscleGain')}
+        onChange={handleChange}
+        className="mr-2"
+      />
+      Muscle Gain
+    </label>
+    <label className="flex items-center text-white">
+      <input
+        type="checkbox"
+        name="fitnessGoals"
+        value="weightLoss"
+        checked={formData.fitnessGoals.includes('weightLoss')}
+        onChange={handleChange}
+        className="mr-2"
+      />
+      Weight Loss
+    </label>
+    <label className="flex items-center text-white">
+      <input
+        type="checkbox"
+        name="fitnessGoals"
+        value="strength"
+        checked={formData.fitnessGoals.includes('strength')}
+        onChange={handleChange}
+        className="mr-2"
+      />
+      Strength
+    </label>
+    <label className="flex items-center text-white">
+      <input
+        type="checkbox"
+        name="fitnessGoals"
+        value="endurance"
+        checked={formData.fitnessGoals.includes('endurance')}
+        onChange={handleChange}
+        className="mr-2"
+      />
+      Endurance
+    </label>
+  </div>
+</div>
 
               {/* Availability Days */}
               <div className="mb-4">
@@ -309,7 +313,7 @@ const GetStartedForm = () => {
 
           {step === 2 && (
             <div>
-              <h3 className="text-xl font-semibold mb-4">Step 2: Select Your Equipment</h3>
+              <h3 className="text-xl font-sans mb-4">Step 2: Select Your Equipment</h3>
 
               {/* Equipment */}
               <div className="mb-4">
@@ -352,11 +356,11 @@ const GetStartedForm = () => {
           <div className="mt-8 space-y-6">
             {workoutPlan.map((workout, index) => (
               <div key={index}>
-                <h3 className="text-2xl font-semibold mb-4">{workout.workout_type}</h3>
+                <h3 className="text-2xl font-sans mb-4">{workout.workout_type}</h3>
                 <div className="space-y-4">
                   {workout.exercises.map((exercise, i) => (
                     <div key={i} className="border-b border-gray-700 pb-4">
-                      <h4 className="text-lg font-semibold">{exercise.name}</h4>
+                      <h4 className="text-lg font-sans">{exercise.name}</h4>
                       <p>{exercise.sets} sets of {exercise.reps} reps</p>
 
                       <button
