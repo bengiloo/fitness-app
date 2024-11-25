@@ -386,7 +386,7 @@ const GetStartedForm = () => {
 ) : (
   <div className="mt-8">
   {/* Adding the new heading above the fallback message */}
-  <h2 className="text-3xl text-center text-white mb-5">Your Meal Plan</h2>
+  <h2 className="text-3xl text-center text-white mb-5">Your Workout Plan</h2>
   <div className="text-center text-gray-400"> No workout available. Try applying the filters or fetching workout plan.
   </div>
   </div>
