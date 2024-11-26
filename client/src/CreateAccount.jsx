@@ -25,7 +25,7 @@ const CreateAccount = () => {
         lastname
       });
       setUser(res.data);
-      localStorage.setItem(email);
+      localStorage.setItem("userEmail", email);
       navigate('/dashboard');
     } catch (err) {
       setError(true);
