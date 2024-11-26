@@ -199,8 +199,8 @@ const GetStartedForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center text-white">
-    <div className="w-full max-w-lg p-6 bg-gray-900 rounded-lg shadow-lg overflow-y-auto max-h-screen">
+    <div className="min-h-screen flex text-white">
+<div className="w-full max-w-lg p-6 bg-gray-900 rounded-lg shadow-lg">
         <div className="text-center mb-6">
           <Link to="/" className="text-blue-500 hover:underline">
           </Link>

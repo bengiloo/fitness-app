@@ -19,15 +19,15 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex min-h-screen flex-col">
       {/* Content above the button - Split into Left and Right */}
       <div className="flex-1 flex">
-        {/* Left Half - MealPlanUI */}
-        <div className="flex-1 flex flex-col items-center justify-center p-4">
+        {/* Left Half - MealPlanUI (with margin to the left) */}
+        <div className="flex-1 flex flex-col items-center p-4 ml-8">
           <MealPlanUI />
         </div>
         {/* Right Half - GetStartedForm */}
-        <div className="flex-1 flex flex-col items-center justify-center p-4">
+        <div className="flex-1 flex flex-col items-center p-4">
           <GetStartedForm />
         </div>
       </div>
