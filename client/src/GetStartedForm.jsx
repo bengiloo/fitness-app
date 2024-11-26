@@ -17,28 +17,25 @@ const GetStartedForm = () => {
     availabilityDays: 3,  // Default to 3 days per week
   });
 
-  // TODO: Needs use-case where if the user has no workout plan, the front end displays to the user "generate a workout plan"
-  //       encouraging them to modify the drop down menus
-  // TODO: Called when user logs in (un-comment when this component is ready)
-  // useEffect(() => {
-  //   const fetchWorkoutPlans = async () => {
-  //     try {
-  //       const email = localStorage.getItem("userEmail");
-  //       if (!email) {
-  //         throw new Error("User email not found in localStorage");
-  //       }
-  //       const response = await axios.post("http://localhost:3000/api/workouts/display-workoutplan", { email });
+  useEffect(() => {
+    const fetchWorkoutPlans = async () => {
+      try {
+        const email = localStorage.getItem("userEmail");
+        if (!email) {
+          throw new Error("User email not found in localStorage");
+        }
+        const response = await axios.post("http://localhost:3000/api/workouts/display-workoutplan", { email });
 
-  //       console.log("The response from the frontend: ", response.data.plan);
-  //       setWorkoutPlan(response.data.plan);
-  //       // debug:
-  //       console.log("use effect: ", workoutPlan);
-  //     } catch (error) {
-  //       console.error("Error fetching workout plan:", error.message);
-  //     }
-  //   };
-  //   fetchWorkoutPlans();
-  // }, []);
+        console.log("The response from the frontend: ", response.data.plan);
+        setWorkoutPlan(response.data.plan);
+        // debug:
+        console.log("use effect: ", workoutPlan);
+      } catch (error) {
+        console.error("Error fetching workout plan:", error.message);
+      }
+    };
+    fetchWorkoutPlans();
+  }, []);
 
   const [workoutPlan, setWorkoutPlan] = useState([]);
 
